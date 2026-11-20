@@ -1,0 +1,11 @@
+{
+  "name": "tp-checklist",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Checklist 100% de Twilight Princess (GameCube) para Android",
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  }
+}
