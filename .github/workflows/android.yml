@@ -33,7 +33,9 @@ jobs:
 
       - name: Compilar APK
         working-directory: android
-        run: ./gradlew assembleDebug
+        run: |
+          for i in 1 2 3; do ./gradlew assembleDebug && break; echo "Tentativa $i falhou, repetindo..."; sleep 15; done
+          test -f app/build/outputs/apk/debug/app-debug.apk
 
       - name: Renomear APK
         run: cp android/app/build/outputs/apk/debug/app-debug.apk tp-checklist.apk
