@@ -57,14 +57,14 @@ function category(id) {
       const items = gr.items.filter(i => {
         if (filter === "todo" && state[i.id]) return false;
         if (filter === "done" && !state[i.id]) return false;
-        return !q || (i.n + " " + (i.h || "") + " " + gr.name).toLowerCase().includes(q);
+        return !q || (i.n + " " + (i.d || "") + " " + gr.name).toLowerCase().includes(q);
       });
       if (!items.length) return "";
       const gd = gr.items.filter(i => state[i.id]).length;
       return `<div class="group"><h2>${esc(gr.name)}<span>${gd}/${gr.items.length}</span></h2>
         ${items.map(i => `<button class="item ${state[i.id] ? "done" : ""}" data-id="${i.id}">
           <span class="box">✓</span>
-          <span class="txt"><b>${esc(i.n)}</b>${i.h ? `<small>${esc(i.h)}</small>` : ""}</span></button>`).join("")}</div>`;
+          <span class="txt"><b>${esc(i.n)}</b>${i.d ? `<small>${esc(i.d)}</small>` : ""}</span></button>`).join("")}</div>`;
     }).join("");
     list.innerHTML = html || `<p class="empty">Nada por aqui.</p>`;
   }
@@ -101,3 +101,15 @@ $("#menu").addEventListener("click", () => {
 });
 window.addEventListener("hashchange", route);
 route();
+
+// Botão voltar do Android: volta para a home; só sai do app estando na home.
+const CapApp = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App;
+if (CapApp) {
+  CapApp.addListener("backButton", () => {
+    if (/^#\/c\//.test(location.hash)) {
+      if (history.length > 1) history.back(); else location.hash = "#/";
+    } else {
+      CapApp.exitApp();
+    }
+  });
+}

@@ -73,3 +73,4 @@ main { padding: 14px 14px 40px; max-width: 640px; margin: 0 auto; }
 .item.done .txt b { text-decoration: line-through; }
 .empty { color: var(--muted); text-align: center; padding: 30px 0; }
 .danger { width: 100%; margin-top: 24px; background: none; border: 1px solid #7a2a4a; color: #ff8fb0; border-radius: 10px; padding: 12px; font: inherit; }
+.item .txt small { display: block; margin-top: 3px; line-height: 1.35; }
